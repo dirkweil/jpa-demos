@@ -1,0 +1,1 @@
+create table JPA_DUMMY (id char(1))

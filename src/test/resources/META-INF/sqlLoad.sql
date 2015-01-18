@@ -1,0 +1,1 @@
+insert into JPA_DUMMY values ('A')
