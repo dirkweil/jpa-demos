@@ -24,6 +24,7 @@
       <property name="hibernate.hbm2ddl.auto" value="update" />
       <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
 
+
       <!-- Logging level -->
       <!-- EclipseLink: FINE logs SQL commands -->
       <property name="eclipselink.logging.level" value="FINE" />
