@@ -1,5 +1,8 @@
 package de.gedoplan.buch.jpademos.entity;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assume.assumeTrue;
+
 import de.gedoplan.buch.jpademos.QueryTester;
 import de.gedoplan.buch.jpademos.TestBase;
 import de.gedoplan.buch.jpademos.helper.NameAndBasisZutat;
@@ -7,7 +10,9 @@ import de.gedoplan.buch.jpademos.helper.NameAndVolProz;
 
 import java.util.List;
 
+import javax.persistence.ParameterMode;
 import javax.persistence.Query;
+import javax.persistence.StoredProcedureQuery;
 import javax.persistence.Tuple;
 import javax.persistence.TupleElement;
 import javax.persistence.TypedQuery;
@@ -20,7 +25,6 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -30,7 +34,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 /**
  * Test der Persistence-Fuktionalität bzgl. der Entity Cocktail.
- * 
+ *
  * @author dw
  */
 public class CocktailTest extends TestBase
@@ -96,7 +100,7 @@ public class CocktailTest extends TestBase
    * Test: Sind die Testdaten korrekt in der DB?
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void testFindAll()
   {
     System.out.println("----- testFindAll -----");
@@ -104,7 +108,7 @@ public class CocktailTest extends TestBase
     TypedQuery<Cocktail> query = this.entityManager.createQuery("select x from Cocktail x order by x.name", Cocktail.class);
     List<Cocktail> cocktails = query.getResultList();
 
-    Assert.assertEquals("Cocktail count", testCocktails.length, cocktails.size());
+    assertEquals("Cocktail count", testCocktails.length, cocktails.size());
     for (int i = 0; i < testCocktails.length; ++i)
     {
       Cocktail testCocktail = testCocktails[i];
@@ -115,11 +119,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Alle Testdaten ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showAll()
   {
     System.out.println("----- showAll -----");
@@ -154,11 +158,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Alle Cocktail-Namen ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showNames()
   {
     System.out.println("----- showNames -----");
@@ -188,18 +192,18 @@ public class CocktailTest extends TestBase
 
   /**
    * Alle Namen und Basiszutaten ausgeben (Tuple Select).
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showNameAndBasiszutatTuple()
   {
     System.out.println("----- showNameAndBasiszutatTuple -----");
 
     /*
-      * Criteria Query aufbauen äquivalent zu "select c.name, c.hauptZutat.name from Cocktail c"
-      */
+     * Criteria Query aufbauen äquivalent zu "select c.name, c.hauptZutat.name from Cocktail c"
+     */
 
     CriteriaBuilder cBuilder = this.entityManager.getCriteriaBuilder();
 
@@ -224,11 +228,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Alle Namen und Basiszutaten ausgeben (Contructor Expression).
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showNameAndBasiszutatCtor()
   {
     System.out.println("----- showNameAndBasiszutatCtor -----");
@@ -261,11 +265,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Alle alkoholischen Cocktails ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showAlcoholic()
   {
     System.out.println("----- showAlcoholic -----");
@@ -303,11 +307,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Höchsten Alkoholanteil der Zutaten ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showAlcoholMaximum()
   {
     System.out.println("----- showAlcoholMaximum -----");
@@ -336,11 +340,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Cocktails und mittlerer Alkoholanteil der Zutaten ausgeben (Tuple Select).
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showAllWithAlcoholAverage()
   {
     System.out.println("----- showAllWithAlcoholAverage -----");
@@ -376,11 +380,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Cocktails und mittlerer Alkoholanteil der Zutaten ausgeben (Constructor Expression).
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showAllWithAlcoholAverage2()
   {
     System.out.println("----- showAllWithAlcoholAverage2 -----");
@@ -417,11 +421,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Cocktailmit einem bestimmten Namen ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showCocktail()
   {
     System.out.println("----- showCocktail -----");
@@ -456,11 +460,11 @@ public class CocktailTest extends TestBase
 
   /**
    * Basiszutaten mit der Anzahl darauf basierender Cocktails ausgeben.
-   * 
+   *
    * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Query mit dem Criteria Query API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void showCocktailCounts()
   {
     System.out.println("----- showCocktailCounts -----");
@@ -537,7 +541,7 @@ public class CocktailTest extends TestBase
    * Test: Bulk Update via JPQL.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void testBulkUpdateJpql()
   {
     System.out.println("----- testBulkUpdateJpql -----");
@@ -547,7 +551,7 @@ public class CocktailTest extends TestBase
     Query query = this.entityManager.createQuery("update Cocktail c set c.name=concat(c.name,' (a)') where c.name='Dummy'");
     int changedRowCount = query.executeUpdate();
 
-    Assert.assertEquals("Changed row count", dummyCocktailCount, changedRowCount);
+    assertEquals("Changed row count", dummyCocktailCount, changedRowCount);
 
     // Änderungen nicht dauerhaft ablegen
     this.entityManager.getTransaction().rollback();
@@ -557,7 +561,7 @@ public class CocktailTest extends TestBase
    * Test: Bulk Delete via JPQL.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void testBulkDeleteJpql()
   {
     System.out.println("----- testBulkDeleteJpql -----");
@@ -567,7 +571,7 @@ public class CocktailTest extends TestBase
     Query query = this.entityManager.createQuery("delete from Cocktail c where c.name='Dummy'");
     int deletedRowCount = query.executeUpdate();
 
-    Assert.assertEquals("Deleted row count", dummyCocktailCount, deletedRowCount);
+    assertEquals("Deleted row count", dummyCocktailCount, deletedRowCount);
 
     // Änderungen nicht dauerhaft ablegen
     this.entityManager.getTransaction().rollback();
@@ -577,7 +581,7 @@ public class CocktailTest extends TestBase
    * Test: Bulk Update via Criteria API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void testBulkUpdateCriteria()
   {
     System.out.println("----- testBulkUpdateCriteria -----");
@@ -594,7 +598,7 @@ public class CocktailTest extends TestBase
     Query query = this.entityManager.createQuery(criteriaUpdate);
     int changedRowCount = query.executeUpdate();
 
-    Assert.assertEquals("Changed row count", dummyCocktailCount, changedRowCount);
+    assertEquals("Changed row count", dummyCocktailCount, changedRowCount);
 
     // Änderungen nicht dauerhaft ablegen
     this.entityManager.getTransaction().rollback();
@@ -604,7 +608,7 @@ public class CocktailTest extends TestBase
    * Test: Bulk Delete via Criteria API.
    */
   @Test
-  //  @Ignore
+  // @Ignore
   public void testBulkDeleteCriteria()
   {
     System.out.println("----- testBulkDeleteCriteria -----");
@@ -620,7 +624,7 @@ public class CocktailTest extends TestBase
     Query query = this.entityManager.createQuery(criteriaDelete);
     int deletedRowCount = query.executeUpdate();
 
-    Assert.assertEquals("Deleted row count", dummyCocktailCount, deletedRowCount);
+    assertEquals("Deleted row count", dummyCocktailCount, deletedRowCount);
 
     // Änderungen nicht dauerhaft ablegen
     this.entityManager.getTransaction().rollback();
@@ -641,5 +645,99 @@ public class CocktailTest extends TestBase
 
     Query query = this.entityManager.createQuery("select c.name, function('soundex', c.name) from Cocktail c");
     QueryTester.printResultList(query);
+  }
+
+  /**
+   * Anzahl Cocktails mit einer bestimmten Zutat ausgeben.
+   *
+   * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Stored Procedure Query.
+   *
+   * Dieser Test ist nur aktiv, wenn das Profile db_mysql genutzt wird, da nur dafür die verwendete Stored Procedure im
+   * Create-Skript der Persistence Unit definiert wird.
+   */
+  @Test
+  public void testStoredProcWithSimpleResult()
+  {
+    System.out.println("----- testStoredProcWithSimpleResult -----");
+
+    assumeTrue("mysql".equals(entityManagerFactory.getProperties().get("gedoplan.database.name")));
+
+    StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery("GET_COCKTAIL_COUNT");
+    query.registerStoredProcedureParameter("ZUTAT_NAME", String.class, ParameterMode.IN);
+    query.setParameter("ZUTAT_NAME", "Sekt");
+    QueryTester.printResultList(query);
+  }
+
+  /**
+   * Cocktails mit einer bestimmten Zutat ausgeben.
+   *
+   * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Stored Procedure Query mit
+   * Entity-Ergebnis.
+   *
+   * Dieser Test ist nur aktiv, wenn das Profile db_mysql genutzt wird, da nur dafür die verwendete Stored Procedure im
+   * Create-Skript der Persistence Unit definiert wird.
+   */
+  @Test
+  public void testStoredProcWithEntityResult()
+  {
+    System.out.println("----- testStoredProcWithEntityResult -----");
+
+    assumeTrue("mysql".equals(entityManagerFactory.getProperties().get("gedoplan.database.name")));
+
+    StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery("GET_COCKTAILS_WITH_ZUTAT", Cocktail.class);
+    query.registerStoredProcedureParameter("ZUTAT_NAME", String.class, ParameterMode.IN);
+    query.setParameter("ZUTAT_NAME", "Sekt");
+    QueryTester.printResultList(query);
+  }
+
+  /**
+   * Alkohol-Anteil einer bestimmten Zutat ermitteln.
+   *
+   * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Stored Procedure Query mit einem
+   * OUT-Parameter.
+   *
+   * Dieser Test ist nur aktiv, wenn das Profile db_mysql genutzt wird, da nur dafür die verwendete Stored Procedure im
+   * Create-Skript der Persistence Unit definiert wird.
+   */
+  @Test
+  public void testStoredProcWithOutParameter()
+  {
+    System.out.println("----- testStoredProcWithOutParameter -----");
+
+    assumeTrue("mysql".equals(entityManagerFactory.getProperties().get("gedoplan.database.name")));
+
+    StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery("GET_ZUTAT_VOLPROZ");
+    query.registerStoredProcedureParameter("ZUTAT_NAME", String.class, ParameterMode.IN);
+    query.registerStoredProcedureParameter("VOLPROZ", Double.class, ParameterMode.INOUT);
+    query.setParameter("ZUTAT_NAME", "Rum");
+    query.execute();
+    System.out.println(query.getOutputParameterValue("VOLPROZ"));
+  }
+
+  /**
+   * Namen einer bestimmten Zutat und aller Cocktails mit dieser Zutat ausgeben.
+   *
+   * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Stored Procedure Query mit mehreren
+   * Result Sets.
+   *
+   * Dieser Test ist nur aktiv, wenn das Profile db_mysql genutzt wird, da nur dafür die verwendete Stored Procedure im
+   * Create-Skript der Persistence Unit definiert wird.
+   */
+  @Test
+  public void testStoredProcWithMultiResult()
+  {
+    System.out.println("----- testStoredProcWithMultiResult -----");
+
+    assumeTrue("mysql".equals(entityManagerFactory.getProperties().get("gedoplan.database.name")));
+
+    StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery("GET_ZUTAT_AND_COCKTAILS");
+    query.registerStoredProcedureParameter("ZUTAT_NAME", String.class, ParameterMode.IN);
+    query.setParameter("ZUTAT_NAME", "Sekt");
+    query.execute();
+    while (query.hasMoreResults())
+    {
+      QueryTester.printResultList(query.getResultList());
+      System.out.println();
+    }
   }
 }

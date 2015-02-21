@@ -40,7 +40,7 @@
     <!--
       Java-Agent zum Enhancement der persistenten Klassen für Testläufe anmelden.
       Das Surefire-Plugin übernimmt die Property argLine in den Aufruf der JVM. Die darin genutzte Property org.eclipse... wird vom
-      Dependency-Plugin auf den vollen Pfad des zugehörigen Jar-Files im lokalen Repository gesetzt. 
+      Dependency-Plugin auf den vollen Pfad des zugehörigen Jar-Files im lokalen Repository gesetzt.
     -->
     <argLine>-javaagent:${org.eclipse.persistence:org.eclipse.persistence.jpa:jar}</argLine>
 
@@ -51,6 +51,19 @@
     <javax.persistence.jdbc.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</javax.persistence.jdbc.url>
     <javax.persistence.jdbc.user>test</javax.persistence.jdbc.user>
     <javax.persistence.jdbc.password>test</javax.persistence.jdbc.password>
+
+    <!--
+      Drop/Create/Load-Skripte.
+    -->
+    <drop.script.name>drop.sql</drop.script.name>
+    <create.script.name>create.sql</create.script.name>
+    <load.script.name>load.sql</load.script.name>
+
+    <!--
+      Datenbank- und JPA-Provider-Name.
+    -->
+    <database.name>h2</database.name>
+    <jpaprovider.name>eclipselink</jpaprovider.name>
   </properties>
 
   <build>
@@ -289,7 +302,7 @@
   <profiles>
     <!-- Hibernate -->
     <profile>
-      <id>hibernate</id>
+      <id>jpa_hibernate</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
@@ -302,11 +315,13 @@
         ]]></persistentClasses>
 
         <argLine></argLine>
+
+        <jpaprovider.name>hibernate</jpaprovider.name>
       </properties>
     </profile>
 
     <profile>
-      <id>h2-file</id>
+      <id>db_h2-file</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
@@ -317,6 +332,34 @@
         <javax.persistence.jdbc.user>jpa-demos</javax.persistence.jdbc.user>
         <javax.persistence.jdbc.password>jpa-demos</javax.persistence.jdbc.password>
       </properties>
+    </profile>
+
+    <profile>
+      <id>db_mysql</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+
+      <properties>
+        <javax.persistence.jdbc.driver>com.mysql.jdbc.Driver</javax.persistence.jdbc.driver>
+        <javax.persistence.jdbc.url>jdbc:mysql://localhost:3306/jpa_demos</javax.persistence.jdbc.url>
+        <javax.persistence.jdbc.user>jpa_demos</javax.persistence.jdbc.user>
+        <javax.persistence.jdbc.password>jpa_demos</javax.persistence.jdbc.password>
+
+        <drop.script.name>drop_mysql.sql</drop.script.name>
+        <create.script.name>create_mysql.sql</create.script.name>
+
+        <database.name>mysql</database.name>
+      </properties>
+
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.33</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
     </profile>
   </profiles>
 

@@ -21,11 +21,11 @@
 
       <!-- Schemagenerierung -->
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
-      <property name="javax.persistence.schema-generation.drop-script-source" value="META-INF/drop.sql" />
+      <property name="javax.persistence.schema-generation.drop-script-source" value="META-INF/${drop.script.name}" />
       <property name="javax.persistence.schema-generation.drop-source" value="script-then-metadata" />
-      <property name="javax.persistence.schema-generation.create-script-source" value="META-INF/create.sql" />
+      <property name="javax.persistence.schema-generation.create-script-source" value="META-INF/${create.script.name}" />
       <property name="javax.persistence.schema-generation.create-source" value="metadata-then-script" />
-      <property name="javax.persistence.sql-load-script-source" value="META-INF/sqlLoad.sql" />
+      <property name="javax.persistence.sql-load-script-source" value="META-INF/${load.script.name}" />
 <!-- 
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
       <property name="eclipselink.ddl-generation.output-mode" value="database" />
@@ -35,7 +35,7 @@
 
       <!-- Logging level -->
       <!-- EclipseLink: FINE logs SQL commands -->
-      <property name="eclipselink.logging.level" value="FINE" />
+      <property name="eclipselink.logging.level" value="OFF" />
       <property name="eclipselink.logging.connection" value="false" />
       <property name="eclipselink.logging.parameters" value="true" />
       <property name="eclipselink.logging.session" value="false" />
@@ -52,6 +52,9 @@
       <property name="hibernate.cache.use_second_level_cache" value="true" />
       <property name="hibernate.cache.use_query_cache" value="true" />
       <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory"/>
+      
+      <property name="gedoplan.database.name" value="${database.name}"/>
+      <property name="gedoplan.jpaprovider.name" value="${jpaprovider.name}"/>
     </properties>
   </persistence-unit>
 </persistence>

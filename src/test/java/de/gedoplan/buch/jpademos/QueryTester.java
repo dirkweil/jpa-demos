@@ -1,5 +1,7 @@
 package de.gedoplan.buch.jpademos;
 
+import de.gedoplan.baselibs.persistence.entity.SingleIdEntity;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,10 +11,10 @@ import javax.persistence.Query;
 
 /**
  * Testprogramm zum Ausprobieren von JPQL-Queries.
- * 
+ *
  * Die Klasse kann auf der KOmmandozeile mit einem JPQL-Text als Parameter aufgerufen werden. Die Query wird durchgeführt und das
  * Ergebnis angezeigt.
- * 
+ *
  * @author dw
  */
 public class QueryTester
@@ -51,6 +53,10 @@ public class QueryTester
           delim = ',';
         }
         System.out.println("]");
+      }
+      else if (result instanceof SingleIdEntity)
+      {
+        System.out.println(((SingleIdEntity<?>) result).toDebugString());
       }
       else
       {
