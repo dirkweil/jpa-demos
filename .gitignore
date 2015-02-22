@@ -1,0 +1,8 @@
+*~
+.svn
+.checkstyle
+.classpath
+.factorypath
+.project
+.settings
+target
