@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<datasources>
+  <datasource jta="true" jndi-name="java:/jdbc/jpaDemos" pool-name="jdbc/jpaDemos" enabled="true" use-ccm="false">
+    <connection-url>jdbc:h2:~/h2/jpa-demos;AUTO_SERVER=TRUE</connection-url>
+    <driver>h2</driver>
+    <security>
+      <user-name>jpa-demos</user-name>
+      <password>jpa-demos</password>
+    </security>
+  </datasource>
+</datasources>
