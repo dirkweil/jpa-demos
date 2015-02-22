@@ -300,7 +300,10 @@
   </dependencies>
 
   <profiles>
-    <!-- Hibernate -->
+    <!-- 
+      Per Default wird Eclipselink als JPA-Provider für die SE-Tests genutzt. 
+      Durch Aktivierung dieses Profils wird stattdessen Hibernate verwendet. 
+      -->
     <profile>
       <id>jpa_hibernate</id>
       <activation>
@@ -320,6 +323,11 @@
       </properties>
     </profile>
 
+    <!-- 
+      Standardmäßig laufen die SE-Tests mit einer In-Memory-H2-Datenbank. 
+      Durch Aktivierung dieses Profils wird stattdessen die Datenbank jpa-demos im Verzeichnis h2 im Home-Verzeichnis
+      des ausführenden Users angelegt bzw. erwartet. 
+      -->
     <profile>
       <id>db_h2-file</id>
       <activation>
@@ -334,6 +342,11 @@
       </properties>
     </profile>
 
+    <!-- 
+      Standardmäßig laufen die SE-Tests mit einer In-Memory-H2-Datenbank. 
+      Durch Aktivierung dieses Profils wird stattdessen eine MySQL-DB genutzt. Diese muss auf dem
+      aktuellen System bereits eingerichtet sein. Der User (jpa_demos) muss DBA-Rechte für die Datenbank jpa_demos besitzen. 
+      -->
     <profile>
       <id>db_mysql</id>
       <activation>

@@ -1,0 +1,16 @@
+Nutzung von Eclipse zur Bearbeitung des Begleitprojekts
+
+Wenn Sie Eclipse für das Begleitprojekt nutzen wollen, benötigen Sie dazu ein Maven-Plugin. Zudem sollten Sie Eclipse um Features 
+zur Unterstüzung von CDI, JSF etc. ergänzen. Ich habe gute Erfahrungen mit der Kombination Eclipse + JBoss Tools gemacht. Leider 
+war es einige Zeit lang so, dass die aus dem Eclipse-Marketplace installierbare Version der JBoss Tools nicht passend war. Eine 
+Alternative, die das ausschließt, ist das JBoss Developer Studio (https://devstudio.jboss.com). Anders als der Name es vermuten 
+lässt, ist es nicht nur für den JBoss Application Server nutzbar.
+ 
+Eclipse enthält diverse Validatoren, die die Korrektheit von Deskriptoren etc. testen sollen. Leider funktionieren diese
+Validatoren (zumindest für Maven-Projekte) nicht korrekt. Wenn nach dem Import der Beispielprojekte Validierungsfehler (z. B. "JPA Problem")
+angezeigt werden, sollten Sie die Validatoren deaktiviern (Window -> Preferences -> Validation: Disable All).
+
+Das Projekte muss als Maven-Projekt in den Eclipse-Workspace importiert werden:
+File -> Import -> Maven -> Existing Maven Projects. Als Root Directory dann das Startverzeichnis des Projekts auswählen. Ggf. wird 
+während des Imports noch das eine oder andere Plugin in Eclipse installiert; dieser Prozess sollte aber einigermaßen selbsterklärend 
+sein. 
