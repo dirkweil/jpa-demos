@@ -7,9 +7,10 @@ Folgende Bugs sind derzeit noch enthalten:
   EclipseLink 2.5.2        Hibernate 4.3.5.Final
   (Default)                (Profil "jpa_hibernate")
   -----------------------  ------------------------
-  [DDLScript]
+  [DDLScript]              [TreatFilter]
   [EntityGraph]            
 
 
   [DDLScript]     Create und Drop Scripts werden nicht erstellt
   [EntityGraph]   Load und Fetch Graphs werden nicht (vollständig) unterstützt
+  [TreatFilter]   Filterfunktion von Treat fehlerhaft: Es werden zu wenig Einträge gefunden

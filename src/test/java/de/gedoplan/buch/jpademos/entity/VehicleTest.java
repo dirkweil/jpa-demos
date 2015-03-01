@@ -10,7 +10,7 @@ import org.junit.Test;
 
 /**
  * Test der Persistence-Fuktionalität bzgl. der Entity SuperMarket_xxx.
- * 
+ *
  * @author dw
  */
 public class VehicleTest extends TestBase
@@ -76,24 +76,39 @@ public class VehicleTest extends TestBase
   }
 
   @Test
-  //  @Ignore
+  // @Ignore
   public void testFindCarsExactly()
   {
     List<Car> entities = this.entityManager.createQuery("select v from Car v where type(v)=Car order by v.id", Car.class).getResultList();
+    Assert.assertEquals("Result size", testCars.length - testLorries.length, entities.size());
     for (Car car : entities)
     {
+      System.out.println(car.toDebugString());
       Assert.assertEquals("Type", Car.class, car.getClass());
     }
   }
 
   @Test
-  //  @Ignore
+  // @Ignore
   public void testFindLargeVehicles()
   {
     List<Vehicle> entities = this.entityManager.createQuery("select v from Vehicle v where treat(v as Lorry).payLoad>30 or treat(v as Ship).tonnage>130000 order by v.id", Vehicle.class).getResultList();
+    Assert.assertEquals("Result size", 2, entities.size());
     for (Vehicle vehicle : entities)
     {
       System.out.println(vehicle.toDebugString());
+    }
+  }
+
+  @Test
+  // @Ignore
+  public void testFindNameAndDetails()
+  {
+    List<Object[]> entries = this.entityManager.createQuery("select v.name,treat(v as Car).noOfDoors from Vehicle v", Object[].class).getResultList();
+    Assert.assertEquals("Result size", testCars.length, entries.size());
+    for (Object[] entry : entries)
+    {
+      System.out.println(entry[0] + ": " + entry[1]);
     }
   }
 }
