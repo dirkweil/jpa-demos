@@ -20,12 +20,15 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+
 @Entity
 @Access(AccessType.FIELD)
 @NamedQuery(name = "Country_findByPhonePrefix", query = "select c from Country c where c.phonePrefix=:phonePrefix")
 @EntityListeners(TraceListener.class)
 @Cacheable(true)
-@Table(name = Country.TABLE_NAME, uniqueConstraints = @UniqueConstraint(columnNames = "NAME"), indexes = @Index(columnList = "PHONE_PREFIX"))
+@Table(name = Country.TABLE_NAME, uniqueConstraints = @UniqueConstraint(columnNames = "NAME"), indexes = {@Index(name="PHONE", columnList = "PHONE_PREFIX", unique=false),
+    																								      @Index(name="ISO",columnList = "ISO_CODE ASC", unique=false), 
+    																								      @Index(name="PHONEISO",columnList = "PHONE_PREFIX, ISO_CODE", unique=false)})
 @SecondaryTable(name = Country.TABLE_2_NAME, uniqueConstraints = @UniqueConstraint(columnNames = "CAR_CODE"), pkJoinColumns = @PrimaryKeyJoinColumn(name = "IC"))
 public class Country
 {
@@ -39,6 +42,7 @@ public class Country
   @Column(name = "NAME")
   private String             name;
 
+  
   @Column(name = "PHONE_PREFIX", length = 5)
   private String             phonePrefix;
 
