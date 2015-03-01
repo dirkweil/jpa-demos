@@ -708,7 +708,7 @@ public class CocktailTest extends TestBase
 
     StoredProcedureQuery query = this.entityManager.createStoredProcedureQuery("GET_ZUTAT_VOLPROZ");
     query.registerStoredProcedureParameter("ZUTAT_NAME", String.class, ParameterMode.IN);
-    query.registerStoredProcedureParameter("VOLPROZ", Double.class, ParameterMode.INOUT);
+    query.registerStoredProcedureParameter("VOLPROZ", Double.class, ParameterMode.OUT);
     query.setParameter("ZUTAT_NAME", "Rum");
     query.execute();
     System.out.println(query.getOutputParameterValue("VOLPROZ"));
@@ -739,5 +739,25 @@ public class CocktailTest extends TestBase
       QueryTester.printResultList(query.getResultList());
       System.out.println();
     }
+  }
+
+  /**
+   * Anzahl Cocktails mit einer bestimmten Zutat ausgeben.
+   *
+   * Dies ist kein Unit-Test im eigentlichen Sinne. Er dient nur der Demonstration einer Named Stored Procedure Query.
+   *
+   * Dieser Test ist nur aktiv, wenn das Profile db_mysql genutzt wird, da nur dafür die verwendete Stored Procedure im
+   * Create-Skript der Persistence Unit definiert wird.
+   */
+  @Test
+  public void testNamedStoredProcWithSimpleResult()
+  {
+    System.out.println("----- testNamedStoredProcWithSimpleResult -----");
+
+    assumeTrue("mysql".equals(entityManagerFactory.getProperties().get("gedoplan.database.name")));
+
+    StoredProcedureQuery query = this.entityManager.createNamedStoredProcedureQuery("Cocktail.GET_COCKTAIL_COUNT");
+    query.setParameter("ZUTAT_NAME", "Sekt");
+    QueryTester.printResultList(query);
   }
 }

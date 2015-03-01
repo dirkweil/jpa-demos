@@ -13,11 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 import javax.persistence.Table;
 
 @Entity
 @Access(AccessType.FIELD)
 @Table(name = Cocktail.TABLE_NAME)
+@NamedStoredProcedureQuery(name = "Cocktail.GET_COCKTAIL_COUNT", procedureName = "GET_COCKTAIL_COUNT", parameters = { @StoredProcedureParameter(name = "ZUTAT_NAME", mode = ParameterMode.IN, type = String.class) })
 public class Cocktail extends StringIdEntity implements Comparable<Cocktail>
 {
   private static final long  serialVersionUID      = 1L;
