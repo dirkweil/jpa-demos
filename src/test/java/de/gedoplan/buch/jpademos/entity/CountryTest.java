@@ -4,6 +4,9 @@ import de.gedoplan.baselibs.utils.util.ExceptionUtil;
 import de.gedoplan.buch.jpademos.TestBase;
 import de.gedoplan.buch.jpademos.helper.ContinentDescription;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -308,14 +311,32 @@ public class CountryTest extends TestBase
 
   /**
    * Test: Dynamische Erzeugung und Nutzung einer Named Query.
+   * 
+   * @author Dirk Weil, Michael Schäfer 
+   * 
    */
   @Test
   // @Ignore
   public void testDynamicNamedQuery()
   {
     System.out.println("----- testDynamicNamedQuery -----");
+    
+    BufferedReader bufferedReader = null;
+	String dynamicQueryString = null;
+	String path = null; 
+    File file = new File("src\\test\\resources\\query.configuration");
+	 	 
+	 
+	try {
+		path = file.getAbsolutePath();
+		bufferedReader = new BufferedReader(new FileReader(path));
+		dynamicQueryString = bufferedReader.readLine();
+	} catch (Exception e) {
+		Assert.fail("Queries können nicht gelesen werden");
+	}
+    
 
-    TypedQuery<Country> newQuery = this.entityManager.createQuery("select c from Country c where c.continent=:continent order by c.isoCode", Country.class);
+    TypedQuery<Country> newQuery = this.entityManager.createQuery(dynamicQueryString, Country.class);
     entityManagerFactory.addNamedQuery("Country_findByContinent", newQuery);
 
     Continent continent = Continent.ASIA;

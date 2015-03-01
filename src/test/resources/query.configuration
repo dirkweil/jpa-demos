@@ -1,0 +1,1 @@
+select c from Country c where c.continent=:continent order by c.isoCode
