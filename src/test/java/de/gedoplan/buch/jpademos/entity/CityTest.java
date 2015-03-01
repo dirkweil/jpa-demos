@@ -154,4 +154,100 @@ public class CityTest extends TestBase
       System.out.println(entry);
     }
   }
+  
+  
+  /**
+   * Native Query ohne Mapping 
+   * 
+   * @author Michael Schäfer 
+   */
+  @Test
+   public void showAllWithoutMapping()  {
+     Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c");
+    List<Object[]> cities = query.getResultList();
+    Assert.assertEquals("City count", testCities.length, cities.size());
+    
+   
+  }
+  
+  
+  /**
+   * Native Query mit Class Mapping 
+   * 
+   * @author Michael Schäfer 
+   */
+  @Test
+  public void showAllClassMapping()  {
+     Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c", City.class);
+    List<City[]> cities = query.getResultList();
+    Assert.assertEquals("City count", testCities.length, cities.size());
+    
+  }
+  
+  
+  /**
+   * Native Query mit Annotation Mapping 
+   * 
+   * @author Michael Schäfer 
+   */
+  
+  @Test
+  public void showAllSqlResultSetMapping()  {
+	  
+     Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c", "City_mapping");
+    List<City[]> cities = query.getResultList();
+    Assert.assertEquals("City count", testCities.length, cities.size());
+    
+   
+    
+  }
+  
+  /**
+   * Native Query ohne Mapping und Inline Konstruktor 
+   * 
+   * @author Michael Schäfer 
+   */
+  @Test
+  public void showAllWithInlineConstructor()
+  {
+     Query query = this.entityManager.createQuery("select new de.gedoplan.buch.jpademos.entity.City(c.name, c.area, c.population) from " + "City" + " c");
+    List<Object[]> cities = query.getResultList();
+    Assert.assertEquals("City count", testCities.length, cities.size());
+    
+   
+  }
+  
+  
+  /**
+   * Native Query mit Konstruktor Mapping 
+   * 
+   * @author Michael Schäfer 
+   */
+
+  @Test
+   public void showAllSqlResultSetMappingWithConstructor()  {
+	  
+     Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c", "City_mapping_constructor");
+    List<City[]> cities = query.getResultList();
+    Assert.assertEquals("City count", testCities.length, cities.size());
+    
+   
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }

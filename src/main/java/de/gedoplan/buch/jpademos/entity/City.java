@@ -7,6 +7,8 @@ import javax.persistence.AccessType;
 import javax.persistence.ColumnResult;
 import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.SqlResultSetMapping;
@@ -25,7 +27,16 @@ import javax.persistence.Table;
         query = "SELECT NAME, POPULATION/AREA AS DENSITY FROM JPA_CITY",
         resultSetMapping = "City_populationDensityCtorResult") })
 @SqlResultSetMappings({
-    @SqlResultSetMapping(
+	 @SqlResultSetMapping(
+		        name = "City_mapping", entities = { @EntityResult(entityClass=de.gedoplan.buch.jpademos.entity.City.class, 
+		                                                          fields={@FieldResult(column="name", name="name"), 
+		        	                                                      @FieldResult(column="area", name="area"),
+		        	                                                      @FieldResult(column="population", name="population")}) }),
+    @SqlResultSetMapping(name = "City_mapping_constructor", classes = { @ConstructorResult(targetClass = City.class, 
+                                                                                         columns = { @ColumnResult(name = "name"),
+    	 																							 @ColumnResult(name = "area"),
+    	 																							 @ColumnResult(name = "population") })}),
+	@SqlResultSetMapping(
         name = "City_populationDensity",
         columns = { @ColumnResult(name = "NAME"), @ColumnResult(name = "DENSITY") }),
     @SqlResultSetMapping(
