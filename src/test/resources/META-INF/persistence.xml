@@ -57,4 +57,77 @@
       <property name="gedoplan.jpaprovider.name" value="${jpaprovider.name}"/>
     </properties>
   </persistence-unit>
+  
+ 	
+  
+  	<!-- 
+	Michael Schäfer, Unit für die Schema Generation mit dem Ansatz Top Down  
+	-->
+
+
+	<persistence-unit name="jpa-demo-top-down">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>de.gedoplan.buch.jpademos.entity.Country</class>
+
+
+		<properties>
+
+			<property name="javax.persistence.database-product-name"		value="H2" />
+			<property name="javax.persistence.database-major-version"		value="1" />
+			<property name="javax.persistence.database-minor-version"		value="3" />
+
+			<property name="javax.persistence.schema-generation.database.action"		value="create" />
+			<property name="javax.persistence.schema-generation.create-source"			value="metadata" />
+			<property name="javax.persistence.schema-generation.scripts.action"			value="create" />
+			<property name="javax.persistence.schema-generation.scripts.create-target"	value="META-INF/jpa-demo-schema.sql" />		
+			<property name="javax.persistence.sql-load-script-source"   			value="META-INF/jpa-demo-schema-load.sql" />
+
+
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1" />
+			<property name="javax.persistence.jdbc.user" value="test" />
+			<property name="javax.persistence.jdbc.password" value="test" />
+		</properties>
+
+	</persistence-unit>
+	
+	<!-- 
+	Michael Schäfer, Unit für die Schema Konfiguration mit dem Ansatz Top Down 	
+	 -->
+	
+	<persistence-unit name="jpa-demo-meet-in-the-middle">
+
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>de.gedoplan.buch.jpademos.entity.Country</class>
+
+
+		<properties>
+
+			<property name="javax.persistence.database-product-name"			value="H2" />
+			<property name="javax.persistence.database-major-version"			value="1" />
+			<property name="javax.persistence.database-minor-version"			value="3" />
+
+
+			<property name="javax.persistence.schema-generation.database.action"		value="create" />
+			<property name="javax.persistence.schema-generation.create-source"			value="script" />
+			<property name="javax.persistence.schema-generation.create-script-source"	value="META-INF/jpa-demo-schema.sql" />
+			<property name="javax.persistence.sql-load-script-source"				value="META-INF/jpa-demo-schema-load.sql" />
+
+
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1" />
+			<property name="javax.persistence.jdbc.user" value="test" />
+			<property name="javax.persistence.jdbc.password" value="test" />
+		</properties>
+
+	</persistence-unit>
+  
+  
+  
+    
+  
+  
 </persistence>
