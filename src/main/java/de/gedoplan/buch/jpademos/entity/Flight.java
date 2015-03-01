@@ -24,7 +24,8 @@ public class Flight extends GeneratedIntegerIdEntity
   private int                flightNo;
 
   @ManyToOne
-  @JoinColumn(name = "PLANE_ID", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+  //@JoinColumn(name = "PLANE_ID", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+  @JoinColumn(name = "PLANE_ID", foreignKey = @ForeignKey(name="flightConstraint", foreignKeyDefinition="foreign key (PLANE_ID) references JPA_AIRCRAFT ON DELETE NO ACTION"))
   //  @JoinTable(name = "JPA_F_A", joinColumns = { @JoinColumn(name = "F_ID") }, inverseJoinColumns = { @JoinColumn(name = "A_ID") })
   private AirCraft           airCraft;
 
