@@ -159,7 +159,7 @@ public class CityTest extends TestBase
   /**
    * Native Query ohne Mapping 
    * 
-   * @author Michael Sch‰fer 
+   * @author Michael Sch√§fer 
    */
   @Test
    public void showAllWithoutMapping()  {
@@ -174,7 +174,7 @@ public class CityTest extends TestBase
   /**
    * Native Query mit Class Mapping 
    * 
-   * @author Michael Sch‰fer 
+   * @author Michael Sch√§fer 
    */
   @Test
   public void showAllClassMapping()  {
@@ -188,7 +188,7 @@ public class CityTest extends TestBase
   /**
    * Native Query mit Annotation Mapping 
    * 
-   * @author Michael Sch‰fer 
+   * @author Michael Sch√§fer 
    */
   
   @Test
@@ -205,12 +205,12 @@ public class CityTest extends TestBase
   /**
    * Native Query ohne Mapping und Inline Konstruktor 
    * 
-   * @author Michael Sch‰fer 
+   * @author Michael Sch√§fer 
    */
   @Test
   public void showAllWithInlineConstructor()
   {
-     Query query = this.entityManager.createQuery("select new de.gedoplan.buch.jpademos.entity.City(c.name, c.area, c.population) from " + "City" + " c");
+    Query query = this.entityManager.createQuery("select new de.gedoplan.buch.jpademos.entity.City(c.name, c.area, c.population) from " + "City" + " c");
     List<Object[]> cities = query.getResultList();
     Assert.assertEquals("City count", testCities.length, cities.size());
     
@@ -221,13 +221,13 @@ public class CityTest extends TestBase
   /**
    * Native Query mit Konstruktor Mapping 
    * 
-   * @author Michael Sch‰fer 
+   * @author Michael Sch√§fer 
    */
 
   @Test
    public void showAllSqlResultSetMappingWithConstructor()  {
 	  
-     Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c", "City_mapping_constructor");
+    Query query = this.entityManager.createNativeQuery("select c.id, c.name, c.area, c.population from " + City.TABLE_NAME + " c", "City_mapping_constructor");
     List<City[]> cities = query.getResultList();
     Assert.assertEquals("City count", testCities.length, cities.size());
     

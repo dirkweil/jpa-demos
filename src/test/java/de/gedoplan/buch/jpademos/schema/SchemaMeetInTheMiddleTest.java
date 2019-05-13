@@ -19,9 +19,9 @@ import org.junit.Test;
 
 
 /**
- * Test für das Feature "Schema Generation" 
+ * Test fÃ¼r das Feature "Schema Generation" 
  * 
- * @author Michael Schäfer 
+ * @author Michael SchÃ¤fer 
  */
 
 public class SchemaMeetInTheMiddleTest extends TestBase
@@ -30,16 +30,16 @@ public class SchemaMeetInTheMiddleTest extends TestBase
 	@BeforeClass
 	public static void setup() {
 		
-		// Konfiguration, die die richtigen Properties für das Szenario meet-in-the-middle setzt 
+		// Konfiguration, die die richtigen Properties fÃ¼r das Szenario meet-in-the-middle setzt 
 		createEntityManagerFactory("jpa-demo-meet-in-the-middle");
 	}
 	
 	
 	
   /**
-   * Prüfe ob das Schemata und die Testdaten geladen wurden 
+   * PrÃ¼fe ob das Schemata und die Testdaten geladen wurden 
    * 
-   * @author Michael Schäfer 
+   * @author Michael SchÃ¤fer 
    */
   @Test
   public void testCreateScript()  {

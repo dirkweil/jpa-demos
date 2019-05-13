@@ -28,7 +28,7 @@ public abstract class TestBase {
 	public void before() {
 		this.log.debug("create entitymanager and start transaction");
 		
-		// Michael Sch‰fer Change for JPA 2.1 Demo 
+		// Michael Sch√§fer Change for JPA 2.1 Demo 
 		if(entityManagerFactory==null)
 			createEntityManagerFactory(DEFAULT_TEST_UNIT);
 		
@@ -63,8 +63,8 @@ public abstract class TestBase {
 		}
 	}
 
-	// Michael Sch‰fer Change for JPA 2.1 Demo  
-	// Es ist mˆglich eine dezidierte Persistent Unit zu erstellen 
+	// Michael Sch√§fer Change for JPA 2.1 Demo  
+	// Es ist m√∂glich eine dezidierte Persistent Unit zu erstellen 
 	protected static EntityManagerFactory createEntityManagerFactory(String unit) {
 		
 		if (entityManagerFactory == null) {

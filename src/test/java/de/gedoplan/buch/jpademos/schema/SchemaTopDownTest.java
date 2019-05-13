@@ -19,9 +19,9 @@ import org.junit.Test;
 
 
 /**
- * Test für das Feature "Schema Generation" 
+ * Test fÃ¼r das Feature "Schema Generation" 
  * 
- * @author Michael Schäfer 
+ * @author Michael SchÃ¤fer 
  */
 
 public class SchemaTopDownTest extends TestBase
@@ -30,16 +30,16 @@ public class SchemaTopDownTest extends TestBase
 	@BeforeClass
 	public static void setup() {
 		
-		// Konfiguration, die die richtigen Properties für das Szenario top-down setzt 
+		// Konfiguration, die die richtigen Properties fÃ¼r das Szenario top-down setzt 
 		createEntityManagerFactory("jpa-demo-top-down");
 	}
 	
 	
 	
   /**
-   * Prüfe ob das Schemata und die Testdaten geladen wurden 
+   * PrÃ¼fe ob das Schemata und die Testdaten geladen wurden 
    * 
-   * @author Michael Schäfer 
+   * @author Michael SchÃ¤fer 
    */
   @Test
   public void testCreateScript()  {
