@@ -5,7 +5,7 @@
   <parent>
     <groupId>de.gedoplan</groupId>
     <artifactId>build-master</artifactId>
-    <version>7.1.4</version>
+    <version>2018.1.2</version>
   </parent>
 
   <artifactId>jpa-demos</artifactId>
@@ -73,14 +73,14 @@
   <repositories>
     <repository>
       <id>gedoplanPublic</id>
-      <url>http://svn.involva-gruppe.de/nexus/content/groups/public</url>
+      <url>http://service.gedoplan.de/nexus/content/groups/public</url>
     </repository>
   </repositories>
 
   <pluginRepositories>
     <pluginRepository>
       <id>gedoplanPublic</id>
-      <url>http://svn.involva-gruppe.de/nexus/content/groups/public</url>
+      <url>http://service.gedoplan.de/nexus/content/groups/public</url>
     </pluginRepository>
   </pluginRepositories>
 
@@ -101,13 +101,13 @@
       <dependency>
         <groupId>de.gedoplan</groupId>
         <artifactId>baselibs-persistence</artifactId>
-        <version>1.0.13</version>
+        <version>1.6</version>
       </dependency>
 
       <dependency>
         <groupId>de.gedoplan</groupId>
         <artifactId>baselibs-utils</artifactId>
-        <version>1.0.15</version>
+        <version>1.6</version>
       </dependency>
 
       <dependency>
